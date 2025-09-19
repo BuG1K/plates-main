@@ -38,7 +38,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-2 h-2 bg-neutral-800 rounded-full transition-all duration-300 group-hover:scale-125" />
             <span className="text-xl font-bold text-gray-800 tracking-tight">
-              LuxeTable
+              HomePhilosophy
             </span>
           </Link>
 

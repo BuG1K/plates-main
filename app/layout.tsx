@@ -6,13 +6,13 @@ import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: 'LuxeTable - Роскошная посуда',
+  title: 'HomePhilosophy - Роскошная посуда',
   description: 'Откройте для себя новинки роскошной посуды. Наша коллекция включает изысканный дизайн и премиальные материалы, идеальные для любого торжества.',
   keywords: ['роскошная посуда', 'столовые приборы', 'элегантная сервировка', 'премиальная посуда', 'фарфор', 'сервировка стола'],
-  authors: [{ name: 'LuxeTable' }],
+  authors: [{ name: 'HomePhilosophy' }],
   robots: 'index, follow',
   openGraph: {
-    title: 'LuxeTable - Роскошная посуда',
+    title: 'HomePhilosophy - Роскошная посуда',
     description: 'Откройте для себя новинки роскошной посуды. Наша коллекция включает изысканный дизайн и премиальные материалы.',
     type: 'website',
     locale: 'ru_RU',
@@ -44,7 +44,7 @@ export default function RootLayout({
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-2 h-2 bg-white rounded-full" />
-                  <span className="text-xl font-bold tracking-tight">LuxeTable</span>
+                  <span className="text-xl font-bold tracking-tight">HomePhilosophy</span>
                 </div>
                 <p className="text-gray-300 text-sm leading-relaxed">
                   Создаем роскошные впечатления от трапезы через изысканную посуду и неподвластную времени элегантность.
@@ -82,7 +82,7 @@ export default function RootLayout({
             </div>
             
             <div className="border-t border-gray-700 mt-12 pt-8 text-center text-sm text-gray-400">
-              <p>&copy; {new Date().getFullYear()} LuxeTable. Все права защищены.</p>
+              <p>&copy; {new Date().getFullYear()} HomePhilosophy. Все права защищены.</p>
             </div>
           </div>
         </footer>

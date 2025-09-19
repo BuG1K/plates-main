@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from "next/navigation";
 
 // export const metadata: Metadata = {
-//   title: 'Свяжитесь с нами - LuxeTable',
-//   description: 'Свяжитесь с LuxeTable для вопросов, индивидуальных заказов или поддержки клиентов.',
+//   title: 'Свяжитесь с нами - HomePhilosophy',
+//   description: 'Свяжитесь с HomePhilosophy для вопросов, индивидуальных заказов или поддержки клиентов.',
 // }
 
 export default function ContactPage() {

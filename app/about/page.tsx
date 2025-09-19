@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import About from '@/components/About'
 
 export const metadata: Metadata = {
-  title: 'О нас - LuxeTable',
-  description: 'Узнайте о приверженности LuxeTable к роскошной посуде, мастерству и созданию незабываемых впечатлений от трапезы.',
+  title: 'О нас - HomePhilosophy',
+  description: 'Узнайте о приверженности HomePhilosophy к роскошной посуде, мастерству и созданию незабываемых впечатлений от трапезы.',
 }
 
 export default function AboutPage() {
@@ -31,7 +31,7 @@ export default function AboutPage() {
               Наша миссия
             </h2>
             <p className="text-base lg:text-lg text-luxury mb-4">
-              В LuxeTable мы верим, что каждая трапеза — это возможность создать яркие воспоминания. 
+              В HomePhilosophy мы верим, что каждая трапеза — это возможность создать яркие воспоминания. 
               Наша миссия — возвышать впечатления от трапезы через тщательно созданную посуду, 
               сочетающую вечную элегантность с современной функциональностью.
             </p>

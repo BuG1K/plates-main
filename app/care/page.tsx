@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { Droplets, Shield, Sparkles, AlertTriangle, CheckCircle, Thermometer, Wind } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Уход за посудой - LuxeTable',
+  title: 'Уход за посудой - HomePhilosophy',
   description: 'Профессиональные рекомендации по уходу за роскошной посудой. Сохраните красоту и долговечность ваших изделий.',
 }
 
