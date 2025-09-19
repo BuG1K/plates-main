@@ -3,28 +3,31 @@
 // import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from "next/navigation";
 
 // export const metadata: Metadata = {
 //   title: 'Свяжитесь с нами - LuxeTable',
 //   description: 'Свяжитесь с LuxeTable для вопросов, индивидуальных заказов или поддержки клиентов.',
 // }
 
-export default function ContactPage({ searchParams }) {
+export default function ContactPage() {
   const [type, setType] = useState('');
   const [messageValue, setMessageValue] = useState('');
   const [showToast, setShowToast] = useState(false);
+  const searchParams = useSearchParams();
+  const text = searchParams.get("text");
 
   useEffect(() => {
-    if (searchParams.text) {
+    if (text) {
       setType("wholesale")
-      setMessageValue(searchParams.text)
+      setMessageValue(text)
   
       const el = document.getElementById("message");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     }
-  }, [searchParams.text])
+  }, [searchParams])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
