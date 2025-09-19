@@ -2,6 +2,7 @@
 
 import { Product } from '@/types'
 import { cn, formatPrice } from '@/lib/utils'
+import placeholder from "../lib/placeholder-img.jpg"
 
 interface ProductCardProps {
   product: Product
@@ -45,6 +46,8 @@ export default function ProductCard({ product, className }: ProductCardProps) {
   const categoryGradient = getCategoryGradient(product)
   const backgroundGradient = getBackgroundGradient(product)
 
+  console.log(product, 888)
+
   return (
     <article className={cn("card-luxury group cursor-pointer", className)}>
       {/* Product Image Container */}
@@ -55,7 +58,12 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         {getProductPlaceholder(product.category, categoryGradient)}
         
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+        <img
+          src={product.img[0].url ? product.img[0].url : placeholder}
+          alt='df'
+          className="absolute w-100 h-100 object-contain transition-all duration-500 group-hover:scale-105"
+        />
+        {/* <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" /> */}
         
         {/* Badge for new arrivals or popular items */}
         {(product.isNewArrival || product.isPopular) && (

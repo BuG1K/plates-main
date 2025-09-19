@@ -1,11 +1,36 @@
+"use client"
+
 import Hero from '@/components/Hero'
 import ProductGrid from '@/components/ProductGrid'
 import TrustedBrands from '@/components/TrustedBrands'
 import CustomerReviews from '@/components/CustomerReviews'
 import About from '@/components/About'
-import { newArrivals, popularItems } from '@/lib/data'
+import { useEffect, useState } from 'react'
 
 export default function HomePage() {
+  const [newArrivalItems, setNewArrivalItems] = useState([])
+  const [popularItems, setPopularItems] = useState([])
+
+  useEffect(() => {
+    fetch(
+      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=3&populate=*"
+    )
+      .then((res) => res.json())
+      .then((data) => setNewArrivalItems(data.data))
+      .catch((err) => console.error('Error fetching data:', err))
+
+    fetch(
+      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[rating][$gte]=4.8&pagination[limit]=3&populate=*"
+    )
+      .then((res) => res.json())
+      .then((data) => setPopularItems(data.data))
+      .catch((err) => console.error('Error fetching data:', err))
+  }, [])
+
+  useEffect(() => {
+    console.log('New Arrival Items:', newArrivalItems)
+  }, [newArrivalItems, popularItems])
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -14,7 +39,7 @@ export default function HomePage() {
       {/* New Arrivals Section */}
       <ProductGrid
         id="new-arrivals"
-        products={newArrivals}
+        products={newArrivalItems}
         title="Новинки"
         style={{ backgroundColor: '#f5f0ea' }}
       />

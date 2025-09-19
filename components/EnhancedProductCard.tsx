@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Heart, ShoppingBag, Eye, Star, Info } from 'lucide-react'
 import { Product } from '@/types'
 import { cn, formatPrice } from '@/lib/utils'
+import Image from 'next/image'
+import placeholder from "../lib/placeholder-img.jpg"
 
 interface EnhancedProductCardProps {
   product: Product
@@ -115,6 +117,8 @@ export default function EnhancedProductCard({
     onQuickView?.(product)
   }
 
+  console.log(product, 11)
+
   if (viewMode === 'list') {
     return (
       <article className={cn("card-luxury group cursor-pointer", className)}>
@@ -128,9 +132,17 @@ export default function EnhancedProductCard({
           >
             {getProductPlaceholder(product.category, categoryGradient)}
             
+          <Image
+            src={product?.img[0] ? product.img[0].url : placeholder}
+            alt='df'
+            fill
+            className="absolute w-100 h-100 object-contain transition-all duration-500 group-hover:scale-105"
+            unoptimized
+          />
+
             {/* Hover overlay */}
             <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-            
+
             {/* Badges */}
             <div className="absolute top-2 left-2 space-y-1">
               {product.isNewArrival && (
@@ -205,7 +217,7 @@ export default function EnhancedProductCard({
             </div>
             
             {/* Price and Actions */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-end">
               <div className="flex items-center gap-2">
                 {product.oldPrice && (
                   <span className="text-sm text-gray-400 line-through">
@@ -219,7 +231,7 @@ export default function EnhancedProductCard({
                 )}
               </div>
               
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <button
                   onClick={handleQuickView}
                   className="p-2 text-gray-400 hover:text-yellow-600 transition-colors"
@@ -235,7 +247,7 @@ export default function EnhancedProductCard({
                     В корзину
                   </button>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -252,13 +264,21 @@ export default function EnhancedProductCard({
       {/* Product Image Container */}
       <div 
         className="h-64 lg:h-72 flex items-center justify-center relative overflow-hidden rounded-t-2xl"
-        style={{ background: backgroundGradient }}
+        style={{ backgroundImage: backgroundGradient }}
       >
         {getProductPlaceholder(product.category, categoryGradient)}
         
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-        
+
+          <Image
+            src={product.img[0] ? product.img[0].url : placeholder}
+            alt='df'
+            fill
+            className="absolute w-100 h-100 object-contain transition-all duration-500 group-hover:scale-105"
+            unoptimized
+          />
+
         {/* Badges */}
         <div className="absolute top-4 left-4 space-y-2">
           {product.isNewArrival && (
@@ -301,7 +321,7 @@ export default function EnhancedProductCard({
             className="flex-1 bg-white/90 backdrop-blur-sm text-gray-800 py-2 px-4 rounded-lg font-medium hover:bg-white transition-colors flex items-center justify-center gap-2"
           >
             <Eye className="w-4 h-4" />
-            Быстрый просмотр
+            {/* Быстрый просмотр */}
           </button>
           {product.inStock !== false && (
             <button
@@ -309,7 +329,7 @@ export default function EnhancedProductCard({
               className="flex-1 bg-yellow-400 text-gray-800 py-2 px-4 rounded-lg font-medium hover:bg-yellow-500 transition-colors flex items-center justify-center gap-2"
             >
               <ShoppingBag className="w-4 h-4" />
-              В корзину
+              {/* В корзину */}
             </button>
           )}
         </div>
@@ -337,7 +357,7 @@ export default function EnhancedProductCard({
           <p className="text-xs text-gray-500 mb-2">{product.material}</p>
         )}
         
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-end">
           <div className="flex items-center gap-2">
             {product.oldPrice && (
               <span className="text-sm text-gray-400 line-through">
@@ -351,8 +371,8 @@ export default function EnhancedProductCard({
             )}
           </div>
           
-          <div className="flex items-center gap-1">
-            <span className="text-xs text-gray-500 capitalize">{product.category}</span>
+          <div className="flex items-center justify-end gap-1">
+            {/* <span className="text-xs text-gray-500 capitalize">{product.category}</span> */}
             {product.inStock === false && (
               <span className="text-xs text-red-500 font-medium ml-2">Нет в наличии</span>
             )}

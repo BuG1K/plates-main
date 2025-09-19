@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, use } from 'react'
 import CatalogNavigation from '@/components/CatalogNavigation'
 import ProductFilters from '@/components/ProductFilters'
 import EnhancedProductCard from '@/components/EnhancedProductCard'
@@ -10,6 +10,7 @@ import { useCartStore } from '@/store/cart-store'
 import { useWishlistStore } from '@/store/wishlist-store'
 import { Product } from '@/types'
 import { cn } from '@/lib/utils'
+import Basket from '@/components/Basket'
 
 // Note: Metadata export removed due to 'use client' directive
 // In a real Next.js 13+ app, you'd handle this differently or use a Server Component wrapper
@@ -64,18 +65,95 @@ export default function CatalogPage() {
     setQuickViewProduct(product)
   }
 
+  const [products, setProducts] = useState([]);
+  const [categorie, setCategorie] = useState('Новинки')
+  const [categories, setCategories] = useState([]);
+  const [query, setQuery] = useState("");
+  const [showBasket, setShowBasket] = useState(false);
+
+  useEffect(() => {
+    fetch(
+      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?populate=*"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.data)
+      })
+      .catch((err) => console.error('Error fetching data:', err))
+
+    fetch(
+      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/categories?&populate=*"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const res = data.data.map(({ name }) => name)
+        
+        setCategories(['Новинки', ...res, "Распродажа"])
+      })
+      .catch((err) => console.error('Error fetching data:', err))
+  }, []);
+
+  const onSetCategorie = (czt) => {
+    setCategorie(czt)
+  };
+
+  const filtProducts = useMemo(() => {
+    if (query) {
+      const filtered = products.filter(p => {
+        const words = query.toLowerCase().split(" ").filter(Boolean);
+
+        return words.every(word =>
+          p.name.toLowerCase().includes(word) ||
+          p.description.toLowerCase().includes(word)
+        );
+      });
+
+      return filtered;
+    }
+
+    if (categorie === "wishlist") {
+      console.log(categorie)
+      const df = window.localStorage.getItem("luxetable-wishlist")
+      const dfg = JSON.parse(df)
+      console.log(dfg)
+      const ids = dfg.state.items.map((item) => item.id)
+      
+      return products.filter((product) => ids.includes(product.id));
+    }
+
+
+    if (categorie === 'Новинки') {
+      return products.filter((product) => product.isNewArrival);
+    } else if (categorie === 'Распродажа') {
+      return products.filter((product) => product.oldPrice);
+    } else if (categorie) {
+      return products.filter((product) => product.category === categorie);
+    }
+  }, [categorie, query, products])
+
   return (
     <div className="min-h-screen">
       {/* Enhanced Catalog Navigation */}
       <CatalogNavigation
+        categorie={categorie}
+        categories={categories}
+        onSetCategorie={onSetCategorie}
+        query={query}
+        setQuery={setQuery}
+        setShowBasket={setShowBasket}
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}
         cartItemCount={getTotalItems()}
         wishlistItemCount={wishlistItems.length}
       />
 
+      {showBasket && (
+        <Basket onClose={() => setShowBasket(false)}  />
+      )}
+      
+
       {/* Product Filters */}
-      <ProductFilters
+      {/* <ProductFilters
         filters={filters}
         sortBy={sortBy}
         viewMode={viewMode}
@@ -83,11 +161,11 @@ export default function CatalogPage() {
         onSortChange={setSortBy}
         onViewModeChange={setViewMode}
         totalProducts={filteredProducts.length}
-      />
+      /> */}
 
       <div className="container-luxury py-8">
         {/* Page Header */}
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-5xl font-normal text-gray-800 mb-6 tracking-wide">
             {activeCategory ? 
               activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1).replace('-', ' ') : 
@@ -100,7 +178,7 @@ export default function CatalogPage() {
               : `Откройте для себя наш ${activeCategory || 'полный'} ассортимент роскошной посуды`
             }
           </p>
-        </div>
+        </div> */}
 
         {/* Products Grid/List */}
         {filteredProducts.length > 0 ? (
@@ -109,9 +187,9 @@ export default function CatalogPage() {
               ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8'
               : 'space-y-6'
           )}>
-            {filteredProducts.map((product) => (
+            {filtProducts.map((product) => (
               <EnhancedProductCard
-                key={product.id}
+                key={product.name}
                 product={product}
                 viewMode={viewMode}
                 onAddToCart={handleAddToCart}

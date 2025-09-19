@@ -1,14 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { use, useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { NavigationItem } from '@/types'
 
 const navigation: NavigationItem[] = [
   { name: 'Главная', href: '/', current: true },
-  { name: 'Категории', href: '/categories', current: false },
+  // { name: 'Категории', href: '/categories', current: false },
   { name: 'Каталог', href: '/catalog', current: false },
   { name: 'Уход за посудой', href: '/care', current: false },
   { name: 'О нас', href: '/about', current: false },
@@ -17,6 +18,17 @@ const navigation: NavigationItem[] = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [navigationItems, setNavigationItems] = useState(navigation)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setNavigationItems(
+      navigation.map((item) => ({
+        ...item,
+        current: item.href === pathname,
+      }))
+    )
+  }, [pathname])
 
   return (
     <header className="relative border-b border-gray-200" style={{ backgroundColor: '#f5f0ea' }}>
@@ -32,7 +44,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-10">
-            {navigation.map((item) => (
+            {navigationItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}

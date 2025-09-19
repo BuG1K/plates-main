@@ -61,7 +61,7 @@ export default function RootLayout({
                 </ul>
               </div>
               
-              <div>
+              {/* <div>
                 <h4 className="font-semibold mb-4">Категории</h4>
                 <ul className="space-y-2 text-sm">
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Столовая посуда</a></li>
@@ -69,7 +69,7 @@ export default function RootLayout({
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Сервировочная посуда</a></li>
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Аксессуары</a></li>
                 </ul>
-              </div>
+              </div> */}
               
               <div>
                 <h4 className="font-semibold mb-4">Контакты</h4>

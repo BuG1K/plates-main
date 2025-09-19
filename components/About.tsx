@@ -24,7 +24,7 @@ export default function About({
   }
 
   return (
-    <section className={cn("mx-4 lg:mx-16 mb-16 lg:mb-20", className)}>
+    <section className={cn("mx-4 lg:mx-16 my-16 lg:mb-20", className)}>
       <div className="bg-white rounded-2xl lg:rounded-3xl p-8 lg:p-16 shadow-card">
         <div className="max-w-4xl">
           <h2 className="text-section font-normal text-gray-800 mb-6 lg:mb-8 tracking-wide">
