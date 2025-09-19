@@ -15,7 +15,7 @@ const Basket = ({ onClose }) => {
     const jbasket = localStorage.getItem('luxetable-cart');
     const basket = jbasket ? JSON.parse(jbasket) : [];
 
-    setState(basket.state.items || []);
+    setState(basket?.state?.items || []);
   }, [])
 
   const onAdd = (id) => {
@@ -154,6 +154,7 @@ const Basket = ({ onClose }) => {
             </div>
 
 
+            {state.length > 0 && (
               <div className="mt-6 pt-6 border-t border-gray-200 mb-10">
                           <h1 className="text-xl text-center font-semibold text-gray-800 mb-4">
                             Оформить заказ
@@ -185,6 +186,7 @@ const Basket = ({ onClose }) => {
         </button>
       </div>
               </div>
+            )}
           </div>
         </div>
   )
