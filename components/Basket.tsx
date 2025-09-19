@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/utils";
 import EnhancedProductCard from "./EnhancedProductCard";
 import { useEffect, useState } from "react";
