@@ -14,8 +14,8 @@ const Basket = ({ onClose }) => {
   useEffect(() => {
     const jbasket = localStorage.getItem('luxetable-cart');
     const basket = jbasket ? JSON.parse(jbasket) : [];
-    console.log('basket', basket)
-    setState(basket.state.items)
+
+    setState(basket.state.items || []);
   }, [])
 
   const onAdd = (id) => {
