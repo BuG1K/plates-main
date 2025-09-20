@@ -51,6 +51,7 @@ const getBackgroundGradient = (product: Product) => {
 }
 
 const renderStars = (rating: number, reviewCount?: number) => {
+  console.log(rating, 'rating')
   const stars = []
   const fullStars = Math.floor(rating)
   const hasHalfStar = rating % 1 !== 0
