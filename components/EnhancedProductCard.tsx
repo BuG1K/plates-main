@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Heart, ShoppingBag, Eye, Star, Info } from 'lucide-react'
+import { Heart, ShoppingBag, Eye, Star, Info, Divide } from 'lucide-react'
 import { Product } from '@/types'
 import { cn, formatPrice } from '@/lib/utils'
 import Image from 'next/image'
@@ -15,6 +15,7 @@ interface EnhancedProductCardProps {
   onAddToWishlist?: (product: Product) => void
   onQuickView?: (product: Product) => void
   isInWishlist?: boolean
+  loading?: boolean
 }
 
 const getProductPlaceholder = (category: string, gradient?: string) => {
@@ -94,7 +95,8 @@ export default function EnhancedProductCard({
   onAddToCart,
   onAddToWishlist,
   onQuickView,
-  isInWishlist = false
+  isInWishlist = false,
+  loading = false,
 }: EnhancedProductCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [isWishlisted, setIsWishlisted] = useState(isInWishlist)
@@ -132,7 +134,6 @@ export default function EnhancedProductCard({
             onMouseLeave={() => setIsHovered(false)}
           >
             {getProductPlaceholder(product.category, categoryGradient)}
-            
           <Image
             src={product?.img[0] ? product.img[0].url : placeholder}
             alt='df'
@@ -258,17 +259,20 @@ export default function EnhancedProductCard({
 
   return (
     <article 
-      className={cn("card-luxury group cursor-pointer", className)}
-      style={{ overflow: 'hidden' }}
+      className={cn("card-luxury group cursor-pointer ", className)}
+      style={{ overflow: 'hidden', position: 'relative' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {loading && (
+        <div id="load" className="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-100" />
+      )}
       {/* Product Image Container */}
       <div 
         className="h-64 lg:h-72 flex items-center justify-center relative overflow-hidden rounded-t-2xl"
         style={{ backgroundImage: backgroundGradient }}
       >
-        {getProductPlaceholder(product.category, categoryGradient)}
+        {/* {getProductPlaceholder(product.category, categoryGradient)} */}
         
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />

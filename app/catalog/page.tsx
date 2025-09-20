@@ -16,6 +16,7 @@ import Basket from '@/components/Basket'
 // In a real Next.js 13+ app, you'd handle this differently or use a Server Component wrapper
 
 export default function CatalogPage() {
+  const [loadingCatalog, setLoadingCatalog] = useState(true)
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null)
   
   // Store hooks
@@ -187,7 +188,31 @@ export default function CatalogPage() {
               ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8'
               : 'space-y-6'
           )}>
-            {filtProducts.map((product) => (
+            {products.length === 0 && [1, 2, 3, 4].map((product) => (
+              <EnhancedProductCard
+                loading={true}
+                key={product}
+                product={{
+                  id: product,
+                  name: `Product ${product}`,
+                  description: 'A beautiful product',
+                  price: 1,
+                  oldPrice: product % 2 === 0 ? 129.99 : undefined,
+                  image: '/placeholder.png',
+                  rating: 4.5,
+                  reviewCount: 10,
+                  inStock: true,
+                  isNewArrival: product % 2 === 0,
+                  category: 'Category',
+                  img: ['/placeholder.png'],
+                }}
+                viewMode={"grid"}
+                className={cn(
+                  viewMode === 'list' ? 'max-w-none' : ''
+                )}
+              />
+            ))}
+            {products.length !== 0 && filtProducts.map((product) => (
               <EnhancedProductCard
                 key={product.name}
                 product={product}

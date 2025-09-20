@@ -3,7 +3,6 @@
 // import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import React, { Suspense, useEffect, useState } from 'react';
-import { useSearchParams } from "next/navigation";
 
 // export const metadata: Metadata = {
 //   title: 'Свяжитесь с нами - HomePhilosophy',
