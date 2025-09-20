@@ -14,11 +14,12 @@ export default function ContactPage() {
   const [type, setType] = useState('');
   const [messageValue, setMessageValue] = useState('');
   const [showToast, setShowToast] = useState(false);
-  const searchParams = useSearchParams();
-  const text = searchParams.get("text");
 
   useEffect(() => {
+    const text = localStorage.getItem("text");
+    
     if (text) {
+      localStorage.removeItem("text");
       setType("wholesale")
       setMessageValue(text)
   
@@ -27,7 +28,7 @@ export default function ContactPage() {
         el.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     }
-  }, [searchParams])
+  }, [])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

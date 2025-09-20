@@ -85,7 +85,8 @@ const Basket = ({ onClose }) => {
   const onSiteBasket = () => {
     const bas = getBasket();
     const message = `Здравствуйте! Хочу сделать заказ:\n${bas}`;
-    router.push(`/contact?text=${encodeURIComponent(message)}`);
+    localStorage.setItem("text", message);
+    router.push(`/contact`);
   }
 
   const onTelegramBasket = () => {
