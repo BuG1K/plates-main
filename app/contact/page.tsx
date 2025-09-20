@@ -2,7 +2,7 @@
 
 // import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from "next/navigation";
 
 // export const metadata: Metadata = {
@@ -64,6 +64,7 @@ export default function ContactPage() {
   }
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="min-h-screen py-16">
       <div className="container-luxury">
         {/* Page Header */}
@@ -255,5 +256,6 @@ export default function ContactPage() {
         }
       `}</style>
     </div>
+    </Suspense>
   )
 }
