@@ -13,14 +13,14 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch(
-      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=3&populate=*"
+      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
     )
       .then((res) => res.json())
       .then((data) => setNewArrivalItems(data.data))
       .catch((err) => console.error('Error fetching data:', err))
 
     fetch(
-      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[rating][$gte]=4.8&pagination[limit]=3&populate=*"
+      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
     )
       .then((res) => res.json())
       .then((data) => setPopularItems(data.data))

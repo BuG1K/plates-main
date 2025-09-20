@@ -125,7 +125,7 @@ export default function EnhancedProductCard({
         <div className="flex">
           {/* Product Image */}
           <div 
-            className="w-48 h-32 flex items-center justify-center relative overflow-hidden rounded-l-2xl flex-shrink-0"
+            className="w-48 h-100% flex items-center justify-center relative overflow-hidden rounded-l-2xl flex-shrink-0"
             style={{ background: backgroundGradient }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -136,7 +136,7 @@ export default function EnhancedProductCard({
             src={product?.img[0] ? product.img[0].url : placeholder}
             alt='df'
             fill
-            className="absolute w-100 h-100 object-contain transition-all duration-500 group-hover:scale-105"
+            className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
             unoptimized
           />
 
@@ -258,6 +258,7 @@ export default function EnhancedProductCard({
   return (
     <article 
       className={cn("card-luxury group cursor-pointer", className)}
+      style={{ overflow: 'hidden' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -275,7 +276,7 @@ export default function EnhancedProductCard({
             src={product.img[0] ? product.img[0].url : placeholder}
             alt='df'
             fill
-            className="absolute w-100 h-100 object-contain transition-all duration-500 group-hover:scale-105"
+            className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
             unoptimized
           />
 

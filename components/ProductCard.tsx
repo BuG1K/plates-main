@@ -61,7 +61,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         <img
           src={product.img[0].url ? product.img[0].url : placeholder}
           alt='df'
-          className="absolute w-100 h-100 object-contain transition-all duration-500 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
         />
         {/* <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" /> */}
         
