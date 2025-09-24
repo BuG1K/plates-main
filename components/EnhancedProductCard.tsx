@@ -125,10 +125,10 @@ export default function EnhancedProductCard({
   if (viewMode === 'list') {
     return (
       <article className={cn("card-luxury group cursor-pointer", className)}>
-        <div className="flex">
+        <div className="flex flex-col sm:flex-row">
           {/* Product Image */}
           <div 
-            className="w-48 h-100% flex items-center justify-center relative overflow-hidden rounded-l-2xl flex-shrink-0"
+            className="w-full h-80 rounded-t-2xl sm:w-48 sm:h-60 flex items-center justify-center relative overflow-hidden rounded-l-2xl flex-shrink-0"
             style={{ background: backgroundGradient }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

@@ -12,6 +12,7 @@ const Basket = ({ onClose }) => {
   const [state, setState] = useState([])
   const { addItem: addToCart, getTotalItems, updateQuantity, removeItem } = useCartStore()
   const router = useRouter();
+  const [sum, setSum] = useState(0);
 
   useEffect(() => {
     const jbasket = localStorage.getItem('luxetable-cart');
@@ -67,9 +68,18 @@ const Basket = ({ onClose }) => {
     }
   }
 
+  useEffect(() => {
+    let newSum = 0
+    state.forEach((item) => {
+      const price = item.product.price * item.quantity
+      newSum += price
+    });
+
+    setSum(newSum)
+  }, [state])
+
   const getBasket = () => {
     let text = ""
-    let sum = 0
 
     state.forEach((item) => {
       const price = item.product.price * item.quantity
@@ -157,16 +167,25 @@ const Basket = ({ onClose }) => {
             </div>
 
 
+
             {state.length > 0 && (
               <div className="mt-6 pt-6 border-t border-gray-200 mb-10">
                           <h1 className="text-xl text-center font-semibold text-gray-800 mb-4">
                             Оформить заказ
                           </h1>
 
-      <div className="flex items-center gap-4 p-5 justify-center">
+  <div className="border-t border-gray-200 py-4 px-7">
+    <div className="flex justify-between items-center text-lg font-semibold">
+      <span>Итого:</span>
+      <span className="text-yellow-600 text-xl">${sum}</span>
+    </div>
+  </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 p-5 justify-center">
         <button
           onClick={onSiteBasket}
           className="flex items-center gap-2 button-primary px-2 py-2 cursor-pointer"
+          style={{ justifyContent: "center" }}
         >
           <ShoppingCart className="w-4 h-4" />
           <span>На сайте</span>
@@ -175,6 +194,7 @@ const Basket = ({ onClose }) => {
         <button
           onClick={onTelegramBasket}
           className="flex items-center gap-2 button-secondary px-2 py-2 cursor-pointer"
+          style={{ justifyContent: "center" }}
         >
           <Send className="w-4 h-4 text-sky-500" />
           <span>Telegram</span>
@@ -183,6 +203,7 @@ const Basket = ({ onClose }) => {
         <button
           onClick={onWhatsAppBasket}
           className="flex items-center gap-2 button-secondary px-2 py-2 cursor-pointer"
+          style={{ justifyContent: "center" }}
         >
           <MessageCircle className="w-4 h-4 text-green-500" />
           <span>WhatsApp</span>

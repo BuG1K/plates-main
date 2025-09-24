@@ -297,8 +297,10 @@ export default function CatalogPage() {
                 className="shadow-none border-0"
               />
               
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex gap-4">
+              <div className="mt-6 pt-6 border-t border-gray-200 flex w-full">
+                <div
+                  className="flex w-full gap-4 flex-col md:flex-row"
+                >
                   <button
                     onClick={() => {
                       handleAddToCart(quickViewProduct)
