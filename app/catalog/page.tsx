@@ -266,7 +266,7 @@ export default function CatalogPage() {
               Ищете что-то особенное? Мы предлагаем индивидуальные решения для посуды, 
               адаптированные под ваш уникальный стиль и требования.
             </p>
-            <button className="button-primary">
+            <button className="button-primary" onClick={() => window.location = "/contact"}>
               Свяжитесь с нами для индивидуальных заказов
             </button>
           </div>
