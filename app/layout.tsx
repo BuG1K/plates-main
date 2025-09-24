@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
+import Ico from "../lib/log.ico"
 
 export const metadata: Metadata = {
   title: 'HomePhilosophy - Роскошная посуда',
@@ -11,6 +12,11 @@ export const metadata: Metadata = {
   keywords: ['роскошная посуда', 'столовые приборы', 'элегантная сервировка', 'премиальная посуда', 'фарфор', 'сервировка стола'],
   authors: [{ name: 'HomePhilosophy' }],
   robots: 'index, follow',
+  icons: {
+    icon: Ico.src,
+    shortcut: Ico.src,
+    apple: Ico.src,
+  },
   openGraph: {
     title: 'HomePhilosophy - Роскошная посуда',
     description: 'Откройте для себя новинки роскошной посуды. Наша коллекция включает изысканный дизайн и премиальные материалы.',
