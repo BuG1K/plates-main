@@ -2,6 +2,8 @@
 
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import baner from '../lib/wh.jpg'
 
 interface HeroProps {
   title?: string
@@ -72,7 +74,22 @@ export default function Hero({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 h-full flex items-center justify-center">
+        <div
+          className="relative z-10 h-full flex items-center justify-center"
+        >
+          <div 
+            className="relative w-full h-[250px] sm:h-[400px] overflow-hidden"
+            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: "-20" }}
+          >
+            <Image
+              src={baner}
+              alt="banner"
+              fill
+              className="object-cover"
+              style={{ zIndex: "-10", opacity: 0.3 }}
+              priority
+            />
+          </div>
           <div className="text-center max-w-2xl px-6 lg:px-8">
             <h1 className="text-4xl lg:text-hero font-normal text-white mb-6 tracking-wider animate-fade-in">
               {title}
