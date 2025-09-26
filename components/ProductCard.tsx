@@ -46,8 +46,6 @@ export default function ProductCard({ product, className }: ProductCardProps) {
   const categoryGradient = getCategoryGradient(product)
   const backgroundGradient = getBackgroundGradient(product)
 
-  console.log(product, 888)
-
   return (
     <article className={cn("card-luxury group cursor-pointer", className)}>
       {/* Product Image Container */}

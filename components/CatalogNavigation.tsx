@@ -77,8 +77,6 @@ export default function CatalogNavigation({
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle search logic here
-    console.log('Search for:', searchQuery)
   }
 
   return (

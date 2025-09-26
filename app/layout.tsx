@@ -25,13 +25,38 @@ export const metadata: Metadata = {
   },
 }
 
+interface Contacts {
+  id: number,
+  documentId: string
+  phone: string
+  mail: string
+  working_hours: string
+  address: string
+  telegram: string
+  whatsapp: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
 export const viewport = 'width=device-width, initial-scale=1'
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const apiUrl = "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/contacts?id=1";
+  const res = await fetch(apiUrl);
+
+  if (!res.ok) {
+    console.error('Failed to fetch contact data');
+  }
+
+  const { data } = await res.json();
+  const con = data[0] as Contacts | undefined
+  const contacts = con
+
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn(
@@ -80,9 +105,9 @@ export default function RootLayout({
               <div>
                 <h4 className="font-semibold mb-4">Контакты</h4>
                 <div className="space-y-2 text-sm text-gray-300">
-                  <p>8-800-LUXETABLE</p>
-                  <p>info@luxetable.ru</p>
-                  <p>Пн-Пт: 9:00-18:00 МСК</p>
+                  <p>{contacts?.phone}</p>
+                  <p>{contacts?.mail}</p>
+                  <p>{contacts?.working_hours}</p>
                 </div>
               </div>
             </div>

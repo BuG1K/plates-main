@@ -49,16 +49,13 @@ export default function CatalogPage() {
   const handleAddToCart = (product: Product) => {
     addToCart(product)
     // You could add a toast notification here
-    console.log(`Added ${product.name} to cart`)
   }
 
   const handleWishlistToggle = (product: Product) => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id)
-      console.log(`Removed ${product.name} from wishlist`)
     } else {
       addToWishlist(product)
-      console.log(`Added ${product.name} to wishlist`)
     }
   }
 
@@ -113,10 +110,8 @@ export default function CatalogPage() {
     }
 
     if (categorie === "wishlist") {
-      console.log(categorie)
       const df = window.localStorage.getItem("luxetable-wishlist")
       const dfg = JSON.parse(df)
-      console.log(dfg)
       const ids = dfg.state.items.map((item) => item.id)
       
       return products.filter((product) => ids.includes(product.id));

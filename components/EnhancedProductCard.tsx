@@ -52,7 +52,6 @@ const getBackgroundGradient = (product: Product) => {
 }
 
 const renderStars = (rating: number, reviewCount?: number) => {
-  console.log(rating, 'rating')
   const stars = []
   const fullStars = Math.floor(rating)
   const hasHalfStar = rating % 1 !== 0
@@ -119,8 +118,6 @@ export default function EnhancedProductCard({
     e.stopPropagation()
     onQuickView?.(product)
   }
-
-  console.log(product, 11)
 
   if (viewMode === 'list') {
     return (

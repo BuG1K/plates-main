@@ -2,17 +2,43 @@
 
 // import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
 
 // export const metadata: Metadata = {
 //   title: 'Свяжитесь с нами - HomePhilosophy',
 //   description: 'Свяжитесь с HomePhilosophy для вопросов, индивидуальных заказов или поддержки клиентов.',
 // }
 
+interface Contacts {
+  id: number,
+  documentId: string
+  phone: string
+  mail: string
+  working_hours: string
+  address: string
+  telegram: string
+  whatsapp: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+
+
 export default function ContactPage() {
   const [type, setType] = useState('');
   const [messageValue, setMessageValue] = useState('');
   const [showToast, setShowToast] = useState(false);
+  const [contacts, setContacts] = useState<Contacts | null>(null);
+
+  useEffect(() => {
+    const apiUrl = "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/contacts?id=1";
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(({ data }) => setContacts(data[0]))
+      .catch(err => console.error('Error fetching contact data:', err));
+  }, [])
 
   useEffect(() => {
     const text = localStorage.getItem("text");
@@ -44,8 +70,6 @@ export default function ContactPage() {
       type: formData.get("type"),
       message: formData.get("message"),
     };
-
-    console.log(order)
 
     const res = await fetch("https://gorgeous-captain-cd0a26631f.strapiapp.com/api/orders", {
       method: "POST",
@@ -92,8 +116,18 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-gray-800 mb-1">Телефон</h3>
-                    <p className="text-luxury">1-800-LUXETABLE</p>
-                    <p className="text-luxury">(1-800-589-3822)</p>
+                   <p className="text-luxury w-100">
+                    {contacts ? (
+                      contacts?.phone
+                    ) : (
+                      <span
+                        className="block w-100% bg-gray-300 animate-pulse rounded"
+                        style={{ color: "rgba(0,0,0,0)" }}
+                      >
+                        S
+                      </span>
+                    )}
+                  </p>
                   </div>
                 </div>
 
@@ -103,8 +137,18 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-gray-800 mb-1">Эл. почта</h3>
-                    <p className="text-luxury">info@luxetable.com</p>
-                    <p className="text-luxury">support@luxetable.com</p>
+                    <p className="text-luxury w-100">
+                      {contacts ? (
+                        contacts?.mail
+                      ) : (
+                        <span
+                          className="block w-100% bg-gray-300 animate-pulse rounded"
+                          style={{ color: "rgba(0,0,0,0)" }}
+                        >
+                          S
+                        </span>
+                      )}
+                    </p>
                   </div>
                 </div>
 
@@ -114,8 +158,18 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-gray-800 mb-1">Адрес</h3>
-                    <p className="text-luxury">123 Luxury Avenue</p>
-                    <p className="text-luxury">New York, NY 10001</p>
+                    <p className="text-luxury w-100">
+                      {contacts ? (
+                        contacts?.address
+                      ) : (
+                        <span
+                          className="block w-100% bg-gray-300 animate-pulse rounded"
+                          style={{ color: "rgba(0,0,0,0)" }}
+                        >
+                          S
+                        </span>
+                      )}
+                    </p>
                   </div>
                 </div>
 
@@ -125,9 +179,20 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-gray-800 mb-1">Часы работы</h3>
-                    <p className="text-luxury">Monday - Friday: 9AM - 6PM EST</p>
-                    <p className="text-luxury">Saturday: 10AM - 4PM EST</p>
-                    <p className="text-luxury">Sunday: Closed</p>
+                    <p className="text-luxury w-100">
+                      {contacts ? (
+                        contacts?.working_hours
+                      ) : (
+                        <span
+                          className="block w-100% bg-gray-300 animate-pulse rounded"
+                          style={{ color: "rgba(0,0,0,0)" }}
+                        >
+                          S
+                          <br />
+                          S
+                        </span>
+                      )}
+                    </p>
                   </div>
                 </div>
               </div>

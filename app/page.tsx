@@ -27,10 +27,6 @@ export default function HomePage() {
       .catch((err) => console.error('Error fetching data:', err))
   }, [])
 
-  useEffect(() => {
-    console.log('New Arrival Items:', newArrivalItems)
-  }, [newArrivalItems, popularItems])
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
