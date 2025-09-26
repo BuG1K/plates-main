@@ -101,10 +101,10 @@ const Basket = ({ onClose }) => {
     state.forEach((item) => {
       const price = item.product.price * item.quantity
       sum += price
-      text += `${item.product.name} - ${item.quantity} шт. - $${price}\n`
+      text += `${item.product.name} - ${item.quantity} шт. - ${price}₸\n`
     })
 
-    text += `\nИтого: $${sum}`
+    text += `\nИтого: ${sum}₸`
     
     return text
   }
@@ -194,7 +194,7 @@ const Basket = ({ onClose }) => {
   <div className="border-t border-gray-200 py-4 px-7">
     <div className="flex justify-between items-center text-lg font-semibold">
       <span>Итого:</span>
-      <span className="text-yellow-600 text-xl">${sum}</span>
+      <span className="text-yellow-600 text-xl">{sum}₸</span>
     </div>
   </div>
 
