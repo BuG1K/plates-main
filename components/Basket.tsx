@@ -13,12 +13,28 @@ const Basket = ({ onClose }) => {
   const { addItem: addToCart, getTotalItems, updateQuantity, removeItem } = useCartStore()
   const router = useRouter();
   const [sum, setSum] = useState(0);
+  const [phone, setPhone] = useState<{ tel: string; wat: string } | null>(null);
 
   useEffect(() => {
     const jbasket = localStorage.getItem('luxetable-cart');
     const basket = jbasket ? JSON.parse(jbasket) : [];
 
     setState(basket?.state?.items || []);
+
+    const apiUrl = "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/contacts?id=1";
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(({ data }) => {
+        if (data.length !== 0) {
+          setPhone({
+            tel: data[0]?.telegram,
+            wat: data[0]?.whatsapp
+          });
+          return;
+        }
+      })
+      .catch(err => console.error('Error fetching contact data:', err));
   }, [])
 
   const onAdd = (id) => {
@@ -80,6 +96,7 @@ const Basket = ({ onClose }) => {
 
   const getBasket = () => {
     let text = ""
+    let sum = 0
 
     state.forEach((item) => {
       const price = item.product.price * item.quantity
@@ -102,14 +119,14 @@ const Basket = ({ onClose }) => {
   const onTelegramBasket = () => {
     const bas = getBasket();
     const message = `Здравствуйте! Хочу сделать заказ:\n${bas}`;
-    const telegramUrl = `https://t.me/+79086660990?text=${encodeURIComponent(message)}`;
+    const telegramUrl = `https://t.me/${phone?.tel}?text=${encodeURIComponent(message)}`;
     window.open(telegramUrl, '_blank');
   }
 
   const onWhatsAppBasket = () => {
     const bas = getBasket();
     const message = `Здравствуйте! Хочу сделать заказ:\n${bas}`;
-    const whatsappUrl = `https://wa.me/+79086660990?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${phone?.wat}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   }
 
