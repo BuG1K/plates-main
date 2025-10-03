@@ -4,7 +4,6 @@ import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
-import Ico from "../lib/log.ico"
 
 export const metadata: Metadata = {
   title: 'HomePhilosophy - Роскошная посуда',
@@ -13,9 +12,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'HomePhilosophy' }],
   robots: 'index, follow',
   icons: {
-    icon: Ico.src,
-    shortcut: Ico.src,
-    apple: Ico.src,
+    icon: "../lib/log.ico",
+    shortcut: "../lib/log.ico",
+    apple: "../lib/log.ico",
   },
   openGraph: {
     title: 'HomePhilosophy - Роскошная посуда',
