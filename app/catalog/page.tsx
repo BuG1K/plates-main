@@ -71,11 +71,12 @@ export default function CatalogPage() {
 
   useEffect(() => {
     fetch(
-      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?populate=*"
+      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?populate=*&pagination[limit]=100"
     )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data)
+        console.log(data)
       })
       .catch((err) => console.error('Error fetching data:', err))
 
