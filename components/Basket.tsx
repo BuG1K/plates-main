@@ -120,14 +120,18 @@ const Basket = ({ onClose }) => {
     const bas = getBasket();
     const message = `Здравствуйте! Хочу сделать заказ:\n${bas}`;
     const telegramUrl = `https://t.me/${phone?.tel}?text=${encodeURIComponent(message)}`;
+
     window.open(telegramUrl, '_blank');
   }
 
   const onWhatsAppBasket = () => {
     const bas = getBasket();
     const message = `Здравствуйте! Хочу сделать заказ:\n${bas}`;
-    const whatsappUrl = `https://wa.me/${phone?.wat}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    const phoneNumber = String(phone?.wat || "")
+      .replace(/\D/g, "");
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, "_blank");
   }
 
   return (

@@ -9,8 +9,9 @@ import { useCatalogStore } from '@/store/catalog-store'
 import { useCartStore } from '@/store/cart-store'
 import { useWishlistStore } from '@/store/wishlist-store'
 import { Product } from '@/types'
-import { cn } from '@/lib/utils'
+import { cn, searchProducts } from '@/lib/utils'
 import Basket from '@/components/Basket'
+import { useFilterProducts } from '@/lib/hooks'
 
 // Note: Metadata export removed due to 'use client' directive
 // In a real Next.js 13+ app, you'd handle this differently or use a Server Component wrapper
@@ -21,12 +22,8 @@ export default function CatalogPage() {
   
   // Store hooks
   const { 
-    filters, 
-    sortBy, 
     viewMode, 
-    updateFilters, 
-    setSortBy, 
-    setViewMode, 
+    updateFilters,  
     getFilteredProducts 
   } = useCatalogStore()
   
@@ -68,65 +65,39 @@ export default function CatalogPage() {
   const [categories, setCategories] = useState([]);
   const [query, setQuery] = useState("");
   const [showBasket, setShowBasket] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const filtProducts = useFilterProducts(products, categorie, query, setLoading, setQuery, setCategorie)
+  const [cartItemCount, setCartItemCount] = useState(0)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    fetch(
-      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?populate=*&pagination[limit]=100"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data.data)
-        console.log(data)
-      })
-      .catch((err) => console.error('Error fetching data:', err))
+    Promise.all([
+      fetch("https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?populate=*&pagination[limit]=100")
+        .then((res) => res.json()),
+      fetch("https://gorgeous-captain-cd0a26631f.strapiapp.com/api/categories?populate=*")
+        .then((res) => res.json())
+    ])
+      .then(([productsData, categoriesData]) => {
+        setProducts(productsData.data);
 
-    fetch(
-      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/categories?&populate=*"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const res = data.data.map(({ name }) => name)
-        
-        setCategories(['Новинки', ...res, "Распродажа"])
+        const categoryNames = categoriesData.data.map(({ name }) => name);
+        setCategories(['Новинки', ...categoryNames, 'Распродажа']);
+
+        setLoading(false);
       })
-      .catch((err) => console.error('Error fetching data:', err))
+      .catch((err) => console.error('Error fetching data:', err));
   }, []);
 
   const onSetCategorie = (czt) => {
     setCategorie(czt)
   };
 
-  const filtProducts = useMemo(() => {
-    if (query) {
-      const filtered = products.filter(p => {
-        const words = query.toLowerCase().split(" ").filter(Boolean);
+  useEffect(() => {
+    setMounted(true)
+    setCartItemCount(getTotalItems())
+  }, [getTotalItems])
 
-        return words.every(word =>
-          p.name.toLowerCase().includes(word) ||
-          p.description.toLowerCase().includes(word)
-        );
-      });
-
-      return filtered;
-    }
-
-    if (categorie === "wishlist") {
-      const df = window.localStorage.getItem("luxetable-wishlist")
-      const dfg = JSON.parse(df)
-      const ids = dfg.state.items.map((item) => item.id)
-      
-      return products.filter((product) => ids.includes(product.id));
-    }
-
-
-    if (categorie === 'Новинки') {
-      return products.filter((product) => product.isNewArrival);
-    } else if (categorie === 'Распродажа') {
-      return products.filter((product) => product.oldPrice);
-    } else if (categorie) {
-      return products.filter((product) => product.category === categorie);
-    }
-  }, [categorie, query, products])
+  if (!mounted) return null
 
   return (
     <div className="min-h-screen">
@@ -140,7 +111,7 @@ export default function CatalogPage() {
         setShowBasket={setShowBasket}
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}
-        cartItemCount={getTotalItems()}
+        cartItemCount={cartItemCount}
         wishlistItemCount={wishlistItems.length}
       />
 
@@ -184,14 +155,14 @@ export default function CatalogPage() {
               ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8'
               : 'space-y-6'
           )}>
-            {products.length === 0 && [1, 2, 3, 4].map((product) => (
+            {loading && [1, 2, 3, 4, 5, 6, 7, 8, 9].map((product) => (
               <EnhancedProductCard
                 loading={true}
                 key={product}
                 product={{
                   id: product,
                   name: `Product ${product}`,
-                  description: 'A beautiful product',
+                  description: 'A beautiful product to enhance your dining experience. /n Crafted with care and precision.',
                   price: 1,
                   oldPrice: product % 2 === 0 ? 129.99 : undefined,
                   image: '/placeholder.png',
@@ -208,9 +179,9 @@ export default function CatalogPage() {
                 )}
               />
             ))}
-            {products.length !== 0 && filtProducts.map((product) => (
+            {(!loading && filtProducts?.length) ? filtProducts.map((product) => (
               <EnhancedProductCard
-                key={product.name}
+                key={product.id}
                 product={product}
                 viewMode={viewMode}
                 onAddToCart={handleAddToCart}
@@ -221,7 +192,7 @@ export default function CatalogPage() {
                   viewMode === 'list' ? 'max-w-none' : ''
                 )}
               />
-            ))}
+            )) : ""}
           </div>
         ) : (
           <div className="text-center py-16">

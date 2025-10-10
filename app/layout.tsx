@@ -57,7 +57,7 @@ export default async function RootLayout({
   const contacts = con
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={cn(
         GeistSans.className,
 "font-serif antialiased min-h-screen"
@@ -104,8 +104,8 @@ export default async function RootLayout({
               <div>
                 <h4 className="font-semibold mb-4">Контакты</h4>
                 <div className="space-y-2 text-sm text-gray-300">
-                  <p>{contacts?.phone}</p>
-                  <p>{contacts?.mail}</p>
+                  <a style={{ display: "block" }} href={`tel:${contacts?.phone}`}>{contacts?.phone}</a>
+                  <a style={{ display: "block" }} href={`mailto:${contacts?.mail}`}>{contacts?.mail}</a>
                   <p>{contacts?.working_hours}</p>
                 </div>
               </div>

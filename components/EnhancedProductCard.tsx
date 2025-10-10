@@ -275,7 +275,7 @@ export default function EnhancedProductCard({
         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
 
           <Image
-            src={product.img[0] ? product.img[0].url : placeholder}
+            src={product.img[0]?.url ? product.img[0].url : placeholder}
             alt='df'
             fill
             className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"

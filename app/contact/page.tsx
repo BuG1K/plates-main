@@ -60,9 +60,6 @@ export default function ContactPage() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-
-
-
     const order = {
       name: formData.get("name"),
       lastName: formData.get("lastName"),
@@ -118,7 +115,7 @@ export default function ContactPage() {
                     <h3 className="font-medium text-gray-800 mb-1">Телефон</h3>
                    <p className="text-luxury w-100">
                     {contacts ? (
-                      contacts?.phone
+                      <a href={`tel:${contacts?.phone}`}>{contacts?.phone}</a>
                     ) : (
                       <span
                         className="block w-100% bg-gray-300 animate-pulse rounded"
@@ -139,7 +136,7 @@ export default function ContactPage() {
                     <h3 className="font-medium text-gray-800 mb-1">Эл. почта</h3>
                     <p className="text-luxury w-100">
                       {contacts ? (
-                        contacts?.mail
+                        <a href={`mailto:${contacts?.mail}`}>{contacts?.mail}</a>
                       ) : (
                         <span
                           className="block w-100% bg-gray-300 animate-pulse rounded"

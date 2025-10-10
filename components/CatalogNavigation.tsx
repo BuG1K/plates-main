@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Search, Heart, ShoppingBag, Menu, X, Eye } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -79,6 +79,18 @@ export default function CatalogNavigation({
     e.preventDefault()
   }
 
+  useEffect(() => {
+    if (!searchQuery.trim() || searchQuery.length <= 2) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setQuery(searchQuery)
+    }, 700);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, setQuery]);
+
   return (
     <div className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
       <div className="container-luxury">
@@ -133,7 +145,6 @@ export default function CatalogNavigation({
                     value={searchQuery}
                     onChange={(e) => {
                       setSearchQuery(e.target.value)
-                      setQuery(e.target.value)
                     }}
                     placeholder="Поиск посуды..."
                     className="w-30 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
@@ -144,7 +155,7 @@ export default function CatalogNavigation({
                     onClick={() => {
                       setShowSearch(false)
                       setSearchQuery('')
-                      setQuery('')
+                      setQuery("")
                     }}
                     className="ml-2 p-2 text-gray-400 hover:text-gray-600"
                   >
