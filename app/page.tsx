@@ -6,6 +6,7 @@ import TrustedBrands from '@/components/TrustedBrands'
 import CustomerReviews from '@/components/CustomerReviews'
 import About from '@/components/About'
 import { useEffect, useState } from 'react'
+import { allProducts, newArrivals, popularItems as sd } from '@/data/products'
 
 export default function HomePage() {
   const [newArrivalItems, setNewArrivalItems] = useState([])
@@ -25,6 +26,10 @@ export default function HomePage() {
       .then((res) => res.json())
       .then((data) => setPopularItems(data.data))
       .catch((err) => console.error('Error fetching data:', err))
+
+
+    setNewArrivalItems(newArrivals)
+    setPopularItems(sd)
   }, [])
 
   return (

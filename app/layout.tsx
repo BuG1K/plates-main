@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
+import contacts from "../data/contacts";
 
 export const metadata: Metadata = {
   title: 'HomePhilosophy - Роскошная посуда',
@@ -45,16 +46,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const apiUrl = "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/contacts?id=1";
-  const res = await fetch(apiUrl);
+  // const apiUrl = "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/contacts?id=1";
+  // const res = await fetch(apiUrl);
 
-  if (!res.ok) {
-    console.error('Failed to fetch contact data');
-  }
+  // if (!res.ok) {
+  //   console.error('Failed to fetch contact data');
+  // }
 
-  const { data } = await res.json();
-  const con = data[0] as Contacts | undefined
-  const contacts = con
+  // const { data } = await res.json();
+  // const con = data[0] as Contacts | undefined
+  // const contacts = con
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>

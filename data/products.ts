@@ -17,6 +17,7 @@ export const newArrivals: Product[] = [
     dimensions: 'Тарелки диаметром 26,7 см, сервиз на 4 персоны',
     discount: 14,
     gradient: 'linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 100%)',
+    img: [{ url: "https://downloader.disk.yandex.ru/preview/e3c8f23c8ba1cdce393a439a1269fef522d767cbf2759c574da556590e7a65f8/68ee9a15/9u6lVqTE1Akwa2_lLyeRtYuHQ0OSXpAwLUhyh5yrJ_JtFHdHv7EOKLuGtpeoCAqD0koaJWctjuStoTSzLEkdDQ%3D%3D?uid=0&filename=0_TK7584_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v3&size=2880x1576" }]
   },
   {
     id: '2',
@@ -33,6 +34,7 @@ export const newArrivals: Product[] = [
     dimensions: '40,6 x 30,5 см овальное',
     weight: '1,45 кг',
     gradient: 'linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%)',
+    img: [{ url: "https://2.downloader.disk.yandex.ru/preview/0835f248f9dab1b4003133dd93b2bd6565ddfb0cdcbee1a3ca6a6cb42973c826/inf/4N6MsnT_gSbvET8S09RJtHyZ7VEnhDnmHHMihoSk_3yVcL_tmufjjTpLPMERP6ci7oL8MZy-Kv9kxlIZKixJlA%3D%3D?uid=2158975331&filename=0_TK7600_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
   {
     id: '3',
@@ -48,6 +50,7 @@ export const newArrivals: Product[] = [
     material: 'Нержавеющая сталь 18/10, позолота',
     dimensions: 'Набор 20 предметов, сервиз на 4 персоны',
     gradient: 'linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 100%)',
+    img: [{ url: "https://1.downloader.disk.yandex.ru/preview/919831dec1013b8db3c99d528c06ac03d2b45725f07ba08a906b9a13651a131e/inf/gRCks68xi9w6WrOvRoV-cm_v9PIHfAfRESKJQ1HsKnwiDNn3bbo-xzuPLPjingCZXpHTOPSgYmWVZS4biAQLFQ%3D%3D?uid=2158975331&filename=0_TK7695_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
 ]
 
@@ -66,6 +69,7 @@ export const popularItems: Product[] = [
     material: 'Тонкий фарфор с золотым ободком',
     dimensions: 'Обеденные тарелки 26,7 см, набор из 6 штук',
     gradient: 'linear-gradient(135deg, #f0f0f0 0%, #fff 100%)',
+    img: [{ url: "https://4.downloader.disk.yandex.ru/preview/732de6d61dce8c039b3e21fa69a2d517a63968ebc51782c25d23442300e0095e/inf/QMqvWm1GtnMFGw_1rAaH8-xuWcegDXxkAOw0MdK-2O6ZBQhSWoYF2uX_iAHfqV2QHPzDsogzb0dW98NB5fWuCA%3D%3D?uid=2158975331&filename=0_TK7762_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
   {
     id: '5',
@@ -83,6 +87,7 @@ export const popularItems: Product[] = [
     dimensions: 'Диаметр 15,2 см, набор из 4 штук',
     discount: 20,
     gradient: 'linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 100%)',
+    img: [{ url: "https://2.downloader.disk.yandex.ru/preview/3ab3ec3674211e96f3b6ef79e49fa46273b8c478848c3735a04738b5aac4fbb7/inf/wXcBjBsHC5xTEcnpKP1wmBYMaJLGuI0YoBZjG24fHfiV0sVdVqHTu0wHbzZyt33i-nHlyodziBcjgfScPLDcGg%3D%3D?uid=2158975331&filename=0_TK7793_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
   {
     id: '6',
@@ -98,6 +103,7 @@ export const popularItems: Product[] = [
     material: 'Нержавеющая сталь, позолота',
     dimensions: 'Сервировочные ложки 23 см, набор из 6 штук',
     gradient: 'linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 100%)',
+    img: [{ url: "https://3.downloader.disk.yandex.ru/preview/5a77cab96a2addc6c7681102844041fdd99a04a21533c35529d604096c02b140/inf/TA5ph-L0yg0nJ4_bIM_FLdO8xsw6zSVceimm711f7TVsrP5oAKgtwCEAEN4ZU7q5J0X3DuVz8OUE3mNW9dF5nw%3D%3D?uid=2158975331&filename=0_TK7891_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
 ]
 
@@ -116,6 +122,7 @@ export const additionalProducts: Product[] = [
     material: 'Экологичный бамбук',
     dimensions: '38 x 25,4 см прямоугольный',
     gradient: 'linear-gradient(135deg, #8B7355 0%, #A68B5B 100%)',
+    img: [{ url: "https://3.downloader.disk.yandex.ru/preview/59878f1e3842b7a7148b1fdd921fdf5cde94900bfd097d4713afcdfd28cb5881/inf/CTg209w0vlujgNpAFhIZPXuxdsp05sl-G3RGLTlGsji8f_7b8wxwVZ1FnaVghzVvouT7Rn3A23IGCXUFKBWQfQ%3D%3D?uid=2158975331&filename=0_TK7924_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
   {
     id: '8',
@@ -130,6 +137,7 @@ export const additionalProducts: Product[] = [
     material: 'Свинцовый кристалл',
     dimensions: 'Объём 250 мл, набор из 4 штук',
     gradient: 'linear-gradient(135deg, #E8E8E8 0%, #F5F5F5 100%)',
+    img: [{ url: "https://3.downloader.disk.yandex.ru/preview/4be40414cdc0a445c09a8bbff02bc3da8f2a50c1eab8d9c566ac028bc444488e/inf/zuUX03EcjQZtCVZMUPxcVXyZ7VEnhDnmHHMihoSk_3xLDxtSHJpZkhQl5i4QqnuijLZmht3StoV6lj7T3vLtlg%3D%3D?uid=2158975331&filename=0_TK7948_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
   {
     id: '9',
@@ -146,6 +154,7 @@ export const additionalProducts: Product[] = [
     dimensions: 'Набор 16 предметов, сервиз на 4 персоны',
     discount: 17,
     gradient: 'linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 100%)',
+    img: [{ url: "https://4.downloader.disk.yandex.ru/preview/5786ad3f50a397294595650a7eb4c481018991051bf7a80fff949cde2533fdcd/inf/IZ4W1Q8bF1HjoVhAsUhSBW_v9PIHfAfRESKJQ1HsKnyamSO8AH1oTeWptbMOCdsfYbNvR0ziop6AsLrenP8gHg%3D%3D?uid=2158975331&filename=0_TK7988_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   },
   {
     id: '10',
@@ -160,6 +169,7 @@ export const additionalProducts: Product[] = [
     material: 'Посеребрённые',
     dimensions: 'Длина 15,2 см, набор из 4 штук',
     gradient: 'linear-gradient(135deg, #C0C0C0 0%, #E5E5E5 100%)',
+    img: [{ url: "https://4.downloader.disk.yandex.ru/preview/5786ad3f50a397294595650a7eb4c481018991051bf7a80fff949cde2533fdcd/inf/IZ4W1Q8bF1HjoVhAsUhSBW_v9PIHfAfRESKJQ1HsKnyamSO8AH1oTeWptbMOCdsfYbNvR0ziop6AsLrenP8gHg%3D%3D?uid=2158975331&filename=0_TK7988_resized.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=2158975331&tknv=v3&size=2880x1576" }]
   }
 ]
 
