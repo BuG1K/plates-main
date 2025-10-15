@@ -17,6 +17,9 @@ export interface Product {
   material?: string
   dimensions?: string
   weight?: string
+  img: {
+    url: string
+  }[]
 }
 
 export interface NavigationItem {
