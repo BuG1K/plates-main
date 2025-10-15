@@ -21,7 +21,7 @@ const Basket = ({ onClose }) => {
 
     setState(basket?.state?.items || []);
 
-    const apiUrl = "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/contacts?id=1";
+    const apiUrl = "http://taxi-novoe.online/api/contacts?id=1";
 
     fetch(apiUrl)
       .then(res => res.json())

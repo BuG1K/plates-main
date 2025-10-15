@@ -1,7 +1,7 @@
 'use client'
 
 import { Product } from '@/types'
-import { cn, formatPrice } from '@/lib/utils'
+import { cn, formatPrice, getImgUrl } from '@/lib/utils'
 import placeholder from "../lib/placeholder-img.jpg"
 
 interface ProductCardProps {
@@ -57,7 +57,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         
         {/* Hover overlay */}
         <img
-          src={product.img[0].url ? product.img[0].url : placeholder}
+          src={product.img[0].url ? getImgUrl(product.img[0].url) : placeholder}
           alt='df'
           className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
         />

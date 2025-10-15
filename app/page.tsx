@@ -6,7 +6,6 @@ import TrustedBrands from '@/components/TrustedBrands'
 import CustomerReviews from '@/components/CustomerReviews'
 import About from '@/components/About'
 import { useEffect, useState } from 'react'
-import { allProducts, newArrivals, popularItems as sd } from '@/data/products'
 
 export default function HomePage() {
   const [newArrivalItems, setNewArrivalItems] = useState([])
@@ -14,22 +13,18 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch(
-      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
+      "http://taxi-novoe.online/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
     )
       .then((res) => res.json())
       .then((data) => setNewArrivalItems(data.data))
       .catch((err) => console.error('Error fetching data:', err))
 
     fetch(
-      "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
+      "http://taxi-novoe.online/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
     )
       .then((res) => res.json())
       .then((data) => setPopularItems(data.data))
       .catch((err) => console.error('Error fetching data:', err))
-
-
-    setNewArrivalItems(newArrivals)
-    setPopularItems(sd)
   }, [])
 
   return (

@@ -2,17 +2,15 @@
 
 import { useState, useMemo, useEffect, use } from 'react'
 import CatalogNavigation from '@/components/CatalogNavigation'
-import ProductFilters from '@/components/ProductFilters'
 import EnhancedProductCard from '@/components/EnhancedProductCard'
 import { allProducts } from '@/data/products'
 import { useCatalogStore } from '@/store/catalog-store'
 import { useCartStore } from '@/store/cart-store'
 import { useWishlistStore } from '@/store/wishlist-store'
 import { Product } from '@/types'
-import { cn, searchProducts } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import Basket from '@/components/Basket'
 import { useFilterProducts } from '@/lib/hooks'
-import categoryNames from "../../data/categoryNames"
 
 // Note: Metadata export removed due to 'use client' directive
 // In a real Next.js 13+ app, you'd handle this differently or use a Server Component wrapper
@@ -72,25 +70,21 @@ export default function CatalogPage() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    // Promise.all([
-    //   fetch("https://gorgeous-captain-cd0a26631f.strapiapp.com/api/products?populate=*&pagination[limit]=100")
-    //     .then((res) => res.json()),
-    //   fetch("https://gorgeous-captain-cd0a26631f.strapiapp.com/api/categories?populate=*")
-    //     .then((res) => res.json())
-    // ])
-    //   .then(([productsData, categoriesData]) => {
-    //     setProducts(productsData.data);
+    Promise.all([
+      fetch("http://taxi-novoe.online/api/products?populate=*&pagination[limit]=100")
+        .then((res) => res.json()),
+      fetch("http://taxi-novoe.online/api/categories?populate=*")
+        .then((res) => res.json())
+    ])
+      .then(([productsData, categoriesData]) => {
+        setProducts(productsData.data);
 
-    //     const categoryNames = categoriesData.data.map(({ name }) => name);
-    //     setCategories(['Новинки', ...categoryNames, 'Распродажа']);
+        const categoryNames = categoriesData.data.map(({ name }) => name);
+        setCategories(['Новинки', ...categoryNames, 'Распродажа']);
 
-    //     setLoading(false);
-    //   })
-    //   .catch((err) => console.error('Error fetching data:', err));
-
-      setLoading(false)
-      setCategories(['Новинки', ...categoryNames, 'Распродажа']);
-      setProducts(allProducts);
+        setLoading(false);
+      })
+      .catch((err) => console.error('Error fetching data:', err));
   }, []);
 
   const onSetCategorie = (czt) => {
@@ -100,7 +94,7 @@ export default function CatalogPage() {
   useEffect(() => {
     setMounted(true)
     setCartItemCount(getTotalItems())
-  }, [getTotalItems])
+  });
 
   if (!mounted) return null
 

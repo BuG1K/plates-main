@@ -32,7 +32,7 @@ export default function ContactPage() {
   const [contacts, setContacts] = useState<Contacts | null>(null);
 
   useEffect(() => {
-    const apiUrl = "https://gorgeous-captain-cd0a26631f.strapiapp.com/api/contacts?id=1";
+    const apiUrl = "http://taxi-novoe.online/api/contacts?id=1";
 
     fetch(apiUrl)
       .then(res => res.json())
@@ -68,7 +68,7 @@ export default function ContactPage() {
       message: formData.get("message"),
     };
 
-    const res = await fetch("https://gorgeous-captain-cd0a26631f.strapiapp.com/api/orders", {
+    const res = await fetch("http://taxi-novoe.online/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

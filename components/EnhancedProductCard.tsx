@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Heart, ShoppingBag, Eye, Star, Info, Divide } from 'lucide-react'
 import { Product } from '@/types'
-import { cn, formatPrice } from '@/lib/utils'
+import { cn, formatPrice, getImgUrl } from '@/lib/utils'
 import Image from 'next/image'
 import placeholder from "../lib/placeholder-img.jpg"
 
@@ -99,6 +99,7 @@ export default function EnhancedProductCard({
 }: EnhancedProductCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [isWishlisted, setIsWishlisted] = useState(isInWishlist)
+  console.log(product)
   
   const categoryGradient = getCategoryGradient(product)
   const backgroundGradient = getBackgroundGradient(product)
@@ -132,7 +133,7 @@ export default function EnhancedProductCard({
           >
             {getProductPlaceholder(product.category, categoryGradient)}
           <Image
-            src={product?.img[0] ? product.img[0].url : placeholder}
+            src={product?.img[0] ? getImgUrl(product.img[0].url) : placeholder}
             alt='df'
             fill
             className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
@@ -275,7 +276,7 @@ export default function EnhancedProductCard({
         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
 
           <Image
-            src={product.img[0]?.url ? product.img[0].url : placeholder}
+            src={product.img[0]?.url ? getImgUrl(product.img[0].url) : placeholder}
             alt='df'
             fill
             className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
