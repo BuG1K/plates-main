@@ -360,8 +360,9 @@ export default function EnhancedProductCard({
         {product.material && (
           <p className="text-xs text-gray-500 mb-2">{product.material}</p>
         )}
-        
-        <div className="flex items-center justify-end">
+      </div>
+
+        <div className="flex items-center justify-end px-4 lg:px-5 pb-4 lg:pb-5">
           <div className="flex items-center gap-2">
             {product.oldPrice && (
               <span className="text-sm text-gray-400 line-through">
@@ -382,7 +383,6 @@ export default function EnhancedProductCard({
             )}
           </div>
         </div>
-      </div>
     </article>
   )
 }

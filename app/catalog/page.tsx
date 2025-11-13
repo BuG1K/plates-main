@@ -71,9 +71,9 @@ export default function CatalogPage() {
 
   useEffect(() => {
     Promise.all([
-      fetch("http://taxi-novoe.online/api/products?populate=*&pagination[limit]=100")
+      fetch("http://sergey.dev.987.fvds.ru/api/products?populate=*&pagination[limit]=100")
         .then((res) => res.json()),
-      fetch("http://taxi-novoe.online/api/categories?populate=*")
+      fetch("http://sergey.dev.987.fvds.ru/api/categories?populate=*")
         .then((res) => res.json())
     ])
       .then(([productsData, categoriesData]) => {
