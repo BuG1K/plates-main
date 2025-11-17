@@ -45,7 +45,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const apiUrl = "http://taxi-novoe.online/api/contacts?id=1";
+  const apiUrl = "https://taxi-novoe.online/api/contacts?id=1";
   const res = await fetch(apiUrl);
 
   if (!res.ok) {

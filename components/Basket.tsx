@@ -21,7 +21,7 @@ const Basket = ({ onClose }) => {
 
     setState(basket?.state?.items || []);
 
-    const apiUrl = "http://taxi-novoe.online/api/contacts?id=1";
+    const apiUrl = "https://taxi-novoe.online/api/contacts?id=1";
 
     fetch(apiUrl)
       .then(res => res.json())

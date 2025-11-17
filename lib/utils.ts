@@ -17,7 +17,7 @@ export const slugify = (text: string) => {
 }
 
 export async function searchProducts(query) {
-  const baseUrl = 'http://taxi-novoe.online/api/products';
+  const baseUrl = 'https://taxi-novoe.online/api/products';
 
   // если строка пустая — просто вернуть все продукты
   if (!query.trim()) {
@@ -41,5 +41,5 @@ export async function searchProducts(query) {
 export const getImgUrl = (img) => {
   if (!img) return null;
 
-  return `http://taxi-novoe.online${img}`;
+  return `https://taxi-novoe.online${img}`;
 }
