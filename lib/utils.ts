@@ -38,6 +38,9 @@ export async function searchProducts(query) {
   return data.data;
 }
 
+
+
+
 export const getImgUrl = (img) => {
   if (!img) return null;
 
