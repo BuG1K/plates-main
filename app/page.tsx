@@ -13,14 +13,14 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch(
-      "http://sergey.dev.987.fvds.ru/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
+      "http://taxi-novoe.online/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
     )
       .then((res) => res.json())
       .then((data) => setNewArrivalItems(data.data))
       .catch((err) => console.error('Error fetching data:', err))
 
     fetch(
-      "http://sergey.dev.987.fvds.ru/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
+      "http://taxi-novoe.online/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
     )
       .then((res) => res.json())
       .then((data) => setPopularItems(data.data))
