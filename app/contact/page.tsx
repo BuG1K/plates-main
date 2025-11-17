@@ -3,6 +3,7 @@
 // import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
+import axios from 'axios';
 
 // export const metadata: Metadata = {
 //   title: 'Свяжитесь с нами - HomePhilosophy',
@@ -68,15 +69,18 @@ export default function ContactPage() {
       message: formData.get("message"),
     };
 
-    const res = await fetch("https://www.taxi-novoe.online/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data: order }),
-    });
 
-    if (!res.ok) {
+    const res = await axios.post(
+      'https://taxi-novoe.ru/api/orders',
+      { data: order },           // <-- тело запроса
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (!res.status || res.status !== 200 ) {
       throw new Error("Ошибка при создании заказа");
     } else {
       setShowToast(true);

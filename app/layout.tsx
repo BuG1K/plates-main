@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
+import axios from 'axios';
 
 export const metadata: Metadata = {
   title: 'HomePhilosophy - Роскошная посуда',
@@ -46,14 +47,13 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const apiUrl = "https://www.taxi-novoe.online/api/contacts?id=1";
-  const res = await fetch(apiUrl);
+  const res = await axios(apiUrl);
 
-  if (!res.ok) {
+  if (!res.status || res.status !== 200) {
     console.error('Failed to fetch contact data');
   }
 
-  const { data } = await res.json();
-  const con = data[0] as Contacts | undefined
+  const con = res.data[0] as Contacts | undefined
   const contacts = con
 
   return (
