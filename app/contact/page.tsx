@@ -68,7 +68,7 @@ export default function ContactPage() {
       message: formData.get("message"),
     };
 
-    const res = await fetch("http://taxi-novoe.online/api/orders", {
+    const res = await fetch("http://taxi-novoe.ru/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

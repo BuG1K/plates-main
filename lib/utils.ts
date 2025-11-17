@@ -44,5 +44,5 @@ export async function searchProducts(query) {
 export const getImgUrl = (img) => {
   if (!img) return null;
 
-  return `https://www.taxi-novoe.online${img}`;
+  return `https://www.taxi-novoe.ru${img}`;
 }
