@@ -6,22 +6,23 @@ import TrustedBrands from '@/components/TrustedBrands'
 import CustomerReviews from '@/components/CustomerReviews'
 import About from '@/components/About'
 import { useEffect, useState } from 'react'
-import axios from 'axios';
 
 export default function HomePage() {
   const [newArrivalItems, setNewArrivalItems] = useState([])
   const [popularItems, setPopularItems] = useState([])
 
   useEffect(() => {
-    axios(
-      "https://www.taxi-novoe.online/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
+    fetch(
+      "https://www.taxi-novoe.ru/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
     )
+      .then((res) => res.json())
       .then((data) => setNewArrivalItems(data.data))
       .catch((err) => console.error('Error fetching data:', err))
 
-    axios(
-      "https://www.taxi-novoe.online/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
+    fetch(
+      "https://www.taxi-novoe.ru/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
     )
+      .then((res) => res.json())
       .then((data) => setPopularItems(data.data))
       .catch((err) => console.error('Error fetching data:', err))
   }, [])

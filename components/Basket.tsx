@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "@/store/cart-store";
 import { MessageCircle, Send, ShoppingBag, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 
 
 const Basket = ({ onClose }) => {
@@ -22,9 +21,10 @@ const Basket = ({ onClose }) => {
 
     setState(basket?.state?.items || []);
 
-    const apiUrl = "https://www.taxi-novoe.online/api/contacts?id=1";
+    const apiUrl = "https://www.taxi-novoe.ru/api/contacts?id=1";
 
-    axios(apiUrl)
+    fetch(apiUrl)
+      .then(res => res.json())
       .then(({ data }) => {
         if (data.length !== 0) {
           setPhone({

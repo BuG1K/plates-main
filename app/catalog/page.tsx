@@ -11,7 +11,6 @@ import { Product } from '@/types'
 import { cn } from '@/lib/utils'
 import Basket from '@/components/Basket'
 import { useFilterProducts } from '@/lib/hooks'
-import axios from 'axios';
 
 // Note: Metadata export removed due to 'use client' directive
 // In a real Next.js 13+ app, you'd handle this differently or use a Server Component wrapper
@@ -72,8 +71,10 @@ export default function CatalogPage() {
 
   useEffect(() => {
     Promise.all([
-      axios("https://www.taxi-novoe.online/api/products?populate=*&pagination[limit]=100"),
-      axios("https://www.taxi-novoe.online/api/categories?populate=*")
+      fetch("https://www.taxi-novoe.ru/api/products?populate=*&pagination[limit]=100")
+        .then((res) => res.json()),
+      fetch("https://www.taxi-novoe.ru/api/categories?populate=*")
+        .then((res) => res.json())
     ])
       .then(([productsData, categoriesData]) => {
         setProducts(productsData.data);
