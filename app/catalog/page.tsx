@@ -70,6 +70,11 @@ export default function CatalogPage() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+
+      const sd = "http://155.212.160.171:1337/users";
+      fetch(sd).then(res => res.json()).then(data => console.log(data));
+
+
     Promise.all([
       fetch("https://www.taxi-novoe.ru/api/products?populate=*&pagination[limit]=100")
         .then((res) => res.json()),
