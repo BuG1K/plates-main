@@ -105,14 +105,14 @@ export default async function RootLayout({
                 </ul>
               </div> */}
               
-              <div>
+              {/* <div>
                 <h4 className="font-semibold mb-4">Контакты</h4>
                 <div className="space-y-2 text-sm text-gray-300">
                   <a style={{ display: "block" }} href={`tel:${contacts?.phone}`}>{contacts?.phone}</a>
                   <a style={{ display: "block" }} href={`mailto:${contacts?.mail}`}>{contacts?.mail}</a>
                   <p>{contacts?.working_hours}</p>
                 </div>
-              </div>
+              </div> */}
             </div>
             
             <div className="border-t border-gray-700 mt-12 pt-8 text-center text-sm text-gray-400">
