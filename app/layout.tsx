@@ -5,7 +5,6 @@ import './globals.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
 import { getContacts } from '@/actions/user' 
-import { get } from 'http'
 
 export const metadata: Metadata = {
   title: 'HomePhilosophy - Роскошная посуда',
@@ -48,8 +47,8 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const res = await getContacts();
-  const con = res[0] as Contacts | undefined
-  const contacts = con
+  const con = Array.isArray(res) ? res[0] : null;
+  const contacts = con;
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>

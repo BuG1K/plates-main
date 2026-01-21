@@ -66,8 +66,8 @@ const getCategories = async () => {
 };
 
 const getProducts = async () => {
-  const { data } = await handler('/products?populate=*&pagination[limit]=1000');
-  return data || null;
+  const res = await handler('/contacts?id=1');
+  return Array.isArray(res?.data) ? res.data : [];
 }
 
 export {
