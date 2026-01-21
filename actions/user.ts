@@ -1,7 +1,6 @@
 const API_URL = 'http://155.212.160.171:1337/api';
 
 const handler = async (filter: string) => {
-  console.log(1)
   try {
     const res = await fetch(API_URL + filter, {
       cache: 'no-store',
@@ -11,15 +10,12 @@ const handler = async (filter: string) => {
       throw new Error(`Ошибка при получении данных: ${res.status}`);
     }
 
-    const data = await res.json();
-    console.log('Fetched data:', data);
-    console.log(1)
-    return data;
+    return await res.json();
   } catch (err) {
     console.error(err);
-    return null;
+    return { data: null };
   }
-}
+};
 
 const getNewProducts = async () => {
   const { data } = await handler('/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*')
