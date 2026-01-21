@@ -3,6 +3,7 @@
 import { Product } from '@/types'
 import { cn, formatPrice, getImgUrl } from '@/lib/utils'
 import placeholder from "../lib/placeholder-img.jpg"
+import Image from 'next/image'
 
 interface ProductCardProps {
   product: Product
@@ -56,9 +57,10 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         {getProductPlaceholder(product.category, categoryGradient)}
         
         {/* Hover overlay */}
-        <img
+        <Image
           src={product.img[0].url ? getImgUrl(product.img[0].url) : placeholder}
           alt='df'
+          fill
           className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
         />
         {/* <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all duration-300" /> */}

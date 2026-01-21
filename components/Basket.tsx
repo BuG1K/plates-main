@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "@/store/cart-store";
 import { MessageCircle, Send, ShoppingBag, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { getContacts } from "@/actions/user";
 
 
 const Basket = ({ onClose }) => {
@@ -23,18 +24,15 @@ const Basket = ({ onClose }) => {
 
     const apiUrl = "https://www.taxi-novoe.ru/api/contacts?id=1";
 
-    fetch(apiUrl)
-      .then(res => res.json())
-      .then(({ data }) => {
-        if (data.length !== 0) {
-          setPhone({
-            tel: data[0]?.telegram,
-            wat: data[0]?.whatsapp
-          });
-          return;
-        }
-      })
-      .catch(err => console.error('Error fetching contact data:', err));
+    getContacts().then(({ data }) => {
+      if (data.length !== 0) {
+        setPhone({
+          tel: data[0]?.telegram,
+          wat: data[0]?.whatsapp
+        });
+        return;
+      }
+    }).catch(err => console.error('Error fetching contact data:', err));
   }, [])
 
   const onAdd = (id) => {

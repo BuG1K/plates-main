@@ -4,6 +4,14 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react']
   },
   images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '155.212.160.171',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+    ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,

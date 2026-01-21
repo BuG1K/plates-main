@@ -1,5 +1,6 @@
 "use client"
 
+import { getContacts, postOrder } from '@/actions/user';
 // import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
@@ -32,12 +33,7 @@ export default function ContactPage() {
   const [contacts, setContacts] = useState<Contacts | null>(null);
 
   useEffect(() => {
-    const apiUrl = "https://www.taxi-novoe.ru/api/contacts?id=1";
-
-    fetch(apiUrl)
-      .then(res => res.json())
-      .then(({ data }) => setContacts(data[0]))
-      .catch(err => console.error('Error fetching contact data:', err));
+    getContacts().then((data) => setContacts(data[0]));
   }, [])
 
   useEffect(() => {
@@ -68,20 +64,10 @@ export default function ContactPage() {
       message: formData.get("message"),
     };
 
-    const res = await fetch("http://taxi-novoe.ru/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data: order }),
-    });
-
-    if (!res.ok) {
-      throw new Error("Ошибка при создании заказа");
-    } else {
+    postOrder(order).then(() => {
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);
-    }
+    });
   }
 
   return (

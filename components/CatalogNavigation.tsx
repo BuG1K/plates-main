@@ -70,6 +70,8 @@ export default function CatalogNavigation({
   const [searchQuery, setSearchQuery] = useState('')
   const [showSearch, setShowSearch] = useState(false)
 
+  console.log(categories, 32423432)
+
   const handleCategoryClick = (categoryId: string) => {
     onCategoryChange?.(categoryId)
     setMobileMenuOpen(false)
@@ -101,7 +103,10 @@ export default function CatalogNavigation({
             {categories.map((item) => (
               <button
                 key={item}
-                onClick={() => onSetCategorie(item)}
+                onClick={() => {
+                  onSetCategorie(item)
+                  setQuery("")
+                }}
                 className={cn(
                   'relative text-sm font-medium transition-all duration-300 hover:text-yellow-600',
                   item === "Новинки" || item === "Распродажа"

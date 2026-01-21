@@ -6,25 +6,15 @@ import TrustedBrands from '@/components/TrustedBrands'
 import CustomerReviews from '@/components/CustomerReviews'
 import About from '@/components/About'
 import { useEffect, useState } from 'react'
+import { getNewProducts, getPopularProducts } from '@/actions/user'
 
 export default function HomePage() {
   const [newArrivalItems, setNewArrivalItems] = useState([])
   const [popularItems, setPopularItems] = useState([])
 
   useEffect(() => {
-    fetch(
-      "https://www.taxi-novoe.ru/api/products?filters[isNewArrival][$eq]=true&pagination[limit]=4&populate=*"
-    )
-      .then((res) => res.json())
-      .then((data) => setNewArrivalItems(data.data))
-      .catch((err) => console.error('Error fetching data:', err))
-
-    fetch(
-      "https://www.taxi-novoe.ru/api/products?filters[rating][$gte]=4.8&pagination[limit]=4&populate=*"
-    )
-      .then((res) => res.json())
-      .then((data) => setPopularItems(data.data))
-      .catch((err) => console.error('Error fetching data:', err))
+    getNewProducts().then((products) => setNewArrivalItems(products || []));
+    getPopularProducts().then((products) => setPopularItems(products || []));
   }, [])
 
   return (

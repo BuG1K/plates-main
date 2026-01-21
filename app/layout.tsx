@@ -4,6 +4,8 @@ import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
+import { getContacts } from '@/actions/user' 
+import { get } from 'http'
 
 export const metadata: Metadata = {
   title: 'HomePhilosophy - Роскошная посуда',
@@ -45,16 +47,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const apiUrl = "https://www.taxi-novoe.ru/api/contacts?id=1";
-  // const res = await fetch(apiUrl);
-
-  // if (!res.ok) {
-  //   console.error('Failed to fetch contact data');
-  // }
-
-  // const { data } = await res.json();
-  // const con = data[0] as Contacts | undefined
-  // const contacts = con
+  const res = await getContacts();
+  const con = res[0] as Contacts | undefined
+  const contacts = con
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
@@ -91,7 +86,7 @@ export default async function RootLayout({
                 </ul>
               </div>
               
-              {/* <div>
+              <div>
                 <h4 className="font-semibold mb-4">Категории</h4>
                 <ul className="space-y-2 text-sm">
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Столовая посуда</a></li>
@@ -99,16 +94,16 @@ export default async function RootLayout({
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Сервировочная посуда</a></li>
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Аксессуары</a></li>
                 </ul>
-              </div> */}
+              </div>
               
-              {/* <div>
+              <div>
                 <h4 className="font-semibold mb-4">Контакты</h4>
                 <div className="space-y-2 text-sm text-gray-300">
                   <a style={{ display: "block" }} href={`tel:${contacts?.phone}`}>{contacts?.phone}</a>
                   <a style={{ display: "block" }} href={`mailto:${contacts?.mail}`}>{contacts?.mail}</a>
                   <p>{contacts?.working_hours}</p>
                 </div>
-              </div> */}
+              </div>
             </div>
             
             <div className="border-t border-gray-700 mt-12 pt-8 text-center text-sm text-gray-400">

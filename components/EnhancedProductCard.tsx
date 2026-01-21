@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Heart, ShoppingBag, Eye, Star, Info, Divide } from 'lucide-react'
 import { Product } from '@/types'
-import { cn, formatPrice, getImgUrl } from '@/lib/utils'
+import { cn, formatPrice, getImgUrl, truncateText } from '@/lib/utils'
 import Image from 'next/image'
 import placeholder from "../lib/placeholder-img.jpg"
 
@@ -136,8 +136,10 @@ export default function EnhancedProductCard({
             src={product?.img[0] ? getImgUrl(product.img[0].url) : placeholder}
             alt='df'
             fill
-            className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
-            unoptimized
+            className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105 object-cover opacity-0 transition-opacity duration-300"
+            onLoadingComplete={(img) => {
+                img.classList.add('opacity-100');
+            }}
           />
 
             {/* Hover overlay */}
@@ -279,8 +281,10 @@ export default function EnhancedProductCard({
             src={product.img[0]?.url ? getImgUrl(product.img[0].url) : placeholder}
             alt='df'
             fill
-            className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105"
-            unoptimized
+            className="absolute inset-0 w-full h-full object-cover transition-transform transition-all duration-500 group-hover:scale-105 object-cover opacity-0 transition-opacity duration-300"
+            onLoadingComplete={(img) => {
+              img.classList.add('opacity-100');
+            }}
           />
 
         {/* Badges */}
@@ -342,8 +346,10 @@ export default function EnhancedProductCard({
       {/* Product Information */}
       <div className="p-4 lg:p-5">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="text-lg lg:text-xl font-normal text-gray-800 mb-1 group-hover:text-yellow-600 transition-colors duration-300">
-            {product.name}
+          <h3
+            className="custom-title text-lg lg:text-xl font-normal text-gray-800 mb-1 group-hover:text-yellow-600 transition-colors duration-300"
+          >
+            {truncateText(product.name, 25)}
           </h3>
           {product.rating && (
             <div className="ml-2">

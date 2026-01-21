@@ -11,6 +11,8 @@ import { Product } from '@/types'
 import { cn } from '@/lib/utils'
 import Basket from '@/components/Basket'
 import { useFilterProducts } from '@/lib/hooks'
+import { getCategories, getProducts } from '@/actions/user'
+import ProductFilters from '@/components/ProductFilters'
 
 // Note: Metadata export removed due to 'use client' directive
 // In a real Next.js 13+ app, you'd handle this differently or use a Server Component wrapper
@@ -65,31 +67,28 @@ export default function CatalogPage() {
   const [query, setQuery] = useState("");
   const [showBasket, setShowBasket] = useState(false);
   const [loading, setLoading] = useState(true);
-  const filtProducts = useFilterProducts(products, categorie, query, setLoading, setQuery, setCategorie)
+  const filtProducts = useFilterProducts(products, categorie, query)
   const [cartItemCount, setCartItemCount] = useState(0)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    console.log(products, 'filtPr3434oducts')
+    setLoading(false)
+  }, [products])
 
-      const sd = "http://155.212.160.171:1337/users";
-      fetch(sd).then(res => res.json()).then(data => console.log(data));
+  useEffect(() => {
+    getCategories().then((categoriesData) => {
+      if (!categoriesData) return;
 
+      setCategories(categoriesData);
+    });
 
-    Promise.all([
-      fetch("https://www.taxi-novoe.ru/api/products?populate=*&pagination[limit]=100")
-        .then((res) => res.json()),
-      fetch("https://www.taxi-novoe.ru/api/categories?populate=*")
-        .then((res) => res.json())
-    ])
-      .then(([productsData, categoriesData]) => {
-        setProducts(productsData.data);
-
-        const categoryNames = categoriesData.data.map(({ name }) => name);
-        setCategories(['Новинки', ...categoryNames, 'Распродажа']);
-
-        setLoading(false);
-      })
-      .catch((err) => console.error('Error fetching data:', err));
+    getProducts().then((productsData) => {
+      if (!productsData) return;
+      console.log(productsData, 'productsData')
+      setProducts(productsData);
+      setLoading(false);
+    });
   }, []);
 
   const onSetCategorie = (czt) => {
@@ -100,6 +99,8 @@ export default function CatalogPage() {
     setMounted(true)
     setCartItemCount(getTotalItems())
   });
+
+  console.log(filtProducts, 'filtProducts')
 
   if (!mounted) return null
 
@@ -136,8 +137,8 @@ export default function CatalogPage() {
       /> */}
 
       <div className="container-luxury py-8">
-        {/* Page Header */}
-        {/* <div className="text-center mb-12">
+        {/* Page Header
+        <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-5xl font-normal text-gray-800 mb-6 tracking-wide">
             {activeCategory ? 
               activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1).replace('-', ' ') : 

@@ -1,70 +1,74 @@
-import { useEffect, useRef, useState } from "react";
-import { searchProducts } from "./utils";
+import { useCallback, useMemo } from "react";
 
-export const useFilterProducts = (
-  products, categorie, query, setLoading, setQuery, setCategorie
-) => {
-  const [filtProducts, setFiltProducts] = useState([])
-  const isShowSearch = useRef(false);
+const normalize = (str: string) =>
+  str
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .split(/\s+/)
+    .filter(Boolean);
 
-  useEffect(() => {
-    if (isShowSearch.current) {
-      isShowSearch.current = false;
-    }
+const useFilterProducts = (
+  products = [],
+  categorie: string,
+  query: string,
+) => useMemo(() => {
+  let result = products;
 
-    if (categorie) {
-      setQuery("");
-      isShowSearch.current = true;
-    }
-  }, [categorie, query])
+  console.log(categorie, 'categorie')
 
-  const getFiltProducts = () => {
-    if (query && isShowSearch.current) {
-      setLoading(true)
-      setCategorie(null)
-      let ids = []
+  // ===== ПОИСК =====
+  if (query) {
+    const normalizedQuery = query.trim().toLowerCase();
+    const queryWords = normalize(normalizedQuery);
 
-      searchProducts(query).then((res) => {
-        isShowSearch.current = true;
-        setLoading(false)
+    return result.filter((product) => {
+      const text = [
+        product.title,
+        product.name,
+        product.description,
+      ]
+        .filter(Boolean)
+        .join(" ");
 
-        if (res.length === 0) {
-          setFiltProducts([])
-        }
-        ids = res.map((p) => p.id)
-        const filtered = products.filter(p => ids.includes(p.id))
+      const productWords = normalize(text);
 
-        setFiltProducts(filtered);
-      })
-
-      return []
-    }
-
-    if (categorie === "wishlist") {
-      const df = window.localStorage.getItem("luxetable-wishlist")
-      const dfg = JSON.parse(df)
-      const ids = dfg.state.items.map((item) => item.id)
-      
-      return products.filter((product) => ids.includes(product.id));
-    }
-
-    if (categorie === 'Новинки') {
-      return products.filter((product) => product.isNewArrival);
-    }
-    
-    if (categorie === 'Распродажа') {
-      return products.filter((product) => product.oldPrice);
-    }
-    
-    if (categorie) {
-      return products.filter((product) => product.category === categorie);
-    }
+      // точное слово ИЛИ начало слова
+      return queryWords.some((qWord) =>
+        productWords.some(
+          (pWord) =>
+            pWord === qWord || pWord.startsWith(qWord)
+        )
+      );
+    });
   }
 
-  useEffect(() => {
-    const ww = getFiltProducts()
-    setFiltProducts(ww)
-  }, [categorie, query, products])
+      // ===== WISHLIST =====
+    if (categorie === "wishlist") {
+      const raw = localStorage.getItem("luxetable-wishlist");
+      if (!raw) return [];
 
-  return filtProducts;
-};
+      try {
+        const ids = JSON.parse(raw).state.items.map((i: { id: any; }) => i.id);
+        return result.filter((p) => ids.includes(p.id));
+      } catch {
+        return [];
+      }
+    }
+
+    // ===== КАТЕГОРИИ =====
+    if (categorie === "Новинки") {
+      return result.filter((p) => p.isNewArrival);
+    }
+
+    if (categorie === "Распродажа") {
+      return result.filter((p) => p.oldPrice);
+    }
+
+    if (categorie) {
+      return result.filter((p) => p.category === categorie);
+    }
+
+  return result;
+}, [products, categorie, query]);
+
+export {  useFilterProducts };

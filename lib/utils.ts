@@ -41,8 +41,18 @@ export async function searchProducts(query) {
 
 
 
+
+
+
 export const getImgUrl = (img) => {
   if (!img) return null;
 
-  return `https://www.taxi-novoe.ru${img}`;
+  return `http://155.212.160.171:1337${img}`;
 }
+
+export const truncateText = (text: string, maxLength: number): string => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.slice(0, maxLength - 3) + '...';
+};
