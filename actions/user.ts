@@ -55,19 +55,15 @@ const postOrder = async (orderData: any) => {
 };
 
 const getCategories = async () => {
-  const { data } = await handler('/categories?populate=*');
-
-  if (!data) {
-    console.error('No data received for categories');
-    return null;
-  }
+  const res = await handler('/categories?populate=*');
+  const data = Array.isArray(res?.data) ? res.data : [];
 
   return [
     "Новинки",
     ...data.map(item => item.name),
     "Распродажа"
-  ]
-}
+  ];
+};
 
 const getProducts = async () => {
   const { data } = await handler('/products?populate=*&pagination[limit]=1000');
