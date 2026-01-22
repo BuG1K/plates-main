@@ -1,3 +1,5 @@
+"use server"
+
 const API_URL = 'http://155.212.160.171:1337/api';
 
 const handler = async (filter: string) => {
@@ -66,7 +68,8 @@ const getCategories = async () => {
 };
 
 const getProducts = async () => {
-  const res = await handler('/contacts?id=1');
+  console.log(2)
+  const res = await handler('/products?pagination[limit]=1000&populate=*');
   return Array.isArray(res?.data) ? res.data : [];
 }
 

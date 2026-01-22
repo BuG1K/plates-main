@@ -84,6 +84,7 @@ export default function CatalogPage() {
     });
 
     getProducts().then((productsData) => {
+      console.log(productsData, 434343)
       if (!productsData) return;
       console.log(productsData, 'productsData')
       setProducts(productsData);
